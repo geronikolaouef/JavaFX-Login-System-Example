@@ -16,9 +16,9 @@ public class XMLController
 {
     private String path;
 
-    public XMLController(String targetPath)
+    public XMLController()
     {
-        path = targetPath;
+        path = "resources/xml/User.xml";
     }
     // returns the name of the targeted element
     public String readElementName(String targetElementName) 
@@ -113,6 +113,18 @@ public class XMLController
         catch (Exception e) 
         {
             e.printStackTrace();
+        }
+    }
+
+    // reset data
+    public void setDeafault()
+    {
+        if (readElementName("autologin").equalsIgnoreCase("false"))
+        {
+            updateElementName("username", "");
+            updateElementName("password", "");
+            updateElementName("autologin", "false");
+            System.out.println("XML attributes set to default state!");
         }
     }
 }

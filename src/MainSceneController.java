@@ -1,5 +1,6 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -15,12 +16,20 @@ public class MainSceneController
     private PasswordField tfPassword;
     @FXML
     private Label lbOutput;
+    @FXML
+    private CheckBox checkBox;
     private HashMap<String, String> users;
+    private XMLController c;
+    private boolean checkBoxSelected;
 
     public MainSceneController() throws SQLException
     {
         users = new HashMap<>();
+        c = new XMLController();
+        checkBoxSelected = false;
+
         parseData();
+
         for (String i : users.keySet()) 
         {
             System.out.println("key: " + i + " value: " + users.get(i));
@@ -37,12 +46,12 @@ public class MainSceneController
         {
             users.put(rs.getString("username"), rs.getString("password"));
         }
-        
+
         dbc.closeConn();
     }
 
     @FXML
-    void btnLoginClicked(ActionEvent event) throws IOException 
+    public void btnLoginClicked(ActionEvent event) throws IOException 
     {
         checkUser(event);
     }
@@ -55,9 +64,18 @@ public class MainSceneController
             {
                 if (users.get(username).equals(tfPassword.getText()))
                 {
-                    XMLController c = new XMLController("resources/xml/User.xml");
+                    
                     c.updateElementName("username", username);
                     c.updateElementName("password", users.get(username));
+
+                    if (checkBoxSelected)
+                    {
+                        c.updateElementName("autologin", "true");
+                    }
+                    else
+                    {
+                        c.updateElementName("autologin", "false");
+                    }
 
                     (new UniversalSceneController()).switchToTarget(event, "SuccesfullLogin.fxml");
                 }
@@ -71,5 +89,24 @@ public class MainSceneController
                 lbOutput.setText("Incorrect Username!");
             }
         }
+    }
+    
+    @FXML
+    public void change(ActionEvent event)
+    {
+        if(checkBox.isSelected()) 
+        {
+            checkBoxSelected = true;
+        }
+        else 
+        {
+            checkBoxSelected = false;
+        }
+    }
+
+    @FXML
+    void btnRegisterClicked(ActionEvent event) throws IOException 
+    {
+        (new UniversalSceneController()).switchToTarget(event, "Register.fxml");
     }
 }

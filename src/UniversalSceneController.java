@@ -19,7 +19,7 @@ public class UniversalSceneController
     
     public void switchToTarget(ActionEvent event, String targetScene) throws IOException 
     {
-        root = FXMLLoader.load(getClass().getResource("SuccesfullLogin.fxml"));
+        root = FXMLLoader.load(getClass().getResource(targetScene));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

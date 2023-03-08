@@ -33,6 +33,13 @@ public class DatabaseController
         return rs;
     }
 
+    public void insert(String query) throws SQLException
+    {
+        stmt.executeUpdate(query);
+        stmt.close();
+        conn.close();
+    }
+
     public void closeConn() throws SQLException
     {
         // close the connection, statement, and result set

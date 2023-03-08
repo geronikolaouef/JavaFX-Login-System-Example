@@ -13,7 +13,14 @@ public class App extends Application
         Parent root;
         try 
         {
-            root = FXMLLoader.load(getClass().getResource("MainScene.fxml"));
+            if ((new XMLController()).readElementName("autologin").equalsIgnoreCase("true"))
+            {
+                root = FXMLLoader.load(getClass().getResource("SuccesfullLogin.fxml"));
+            }
+            else
+            {
+                root = FXMLLoader.load(getClass().getResource("MainScene.fxml"));
+            }
             Scene scene = new Scene(root);
             primaryStage.setTitle("Login System Example");
             primaryStage.setResizable(false);
@@ -29,6 +36,13 @@ public class App extends Application
         {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void stop()
+    {
+        (new XMLController()).setDeafault();
+        System.out.println("Stage is closing");
     }
     public static void main(String[] args) 
     {
