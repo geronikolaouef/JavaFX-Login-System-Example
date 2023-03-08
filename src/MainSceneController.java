@@ -37,6 +37,8 @@ public class MainSceneController
         {
             users.put(rs.getString("username"), rs.getString("password"));
         }
+        
+        dbc.closeConn();
     }
 
     @FXML
