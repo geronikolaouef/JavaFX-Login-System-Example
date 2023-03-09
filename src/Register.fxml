@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RegisterController">
    <children>
@@ -13,5 +13,6 @@
       <PasswordField fx:id="tfPassword" alignment="CENTER" layoutX="152.0" layoutY="164.0" prefHeight="25.0" prefWidth="303.0" promptText="Enter your password" />
       <PasswordField fx:id="tfRepeat" alignment="CENTER" layoutX="151.0" layoutY="200.0" prefHeight="25.0" prefWidth="303.0" promptText="Repeat passwod" />
       <Button layoutX="151.0" layoutY="274.0" mnemonicParsing="false" onAction="#btnCancelClicked" prefHeight="25.0" prefWidth="303.0" text="Cancel" />
+      <Label fx:id="lbAlert" alignment="CENTER" layoutX="152.0" layoutY="103.0" prefHeight="17.0" prefWidth="303.0" textFill="RED" />
    </children>
 </AnchorPane>

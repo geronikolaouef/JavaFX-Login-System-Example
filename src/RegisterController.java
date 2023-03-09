@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -15,6 +16,8 @@ public class RegisterController
     private PasswordField tfRepeat;
     @FXML
     private TextField tfUsername;
+    @FXML
+    private Label lbAlert;
     private HashMap<String, String> users;
 
     public RegisterController() throws SQLException
@@ -43,7 +46,7 @@ public class RegisterController
         {
             if (user.equalsIgnoreCase(tfUsername.getText()))
             {   
-                System.out.println("Username taken!");
+                lbAlert.setText("Username is taken!");
                 return false;
             }
         }
@@ -57,12 +60,12 @@ public class RegisterController
         
         if (password.isEmpty())
         {
-            System.out.println("Password can not be empty!");
+            lbAlert.setText("Password fields can not be empty!");
             return false;
         }
         if (!password.equals(tfRepeat.getText()))
         {
-            System.out.println("Passwords must match!");
+            lbAlert.setText("Passwords must match!");
             return false;
         }
 
@@ -80,12 +83,16 @@ public class RegisterController
         if (validateUsername() && validatePassword())
         {
             insertToDB();
-            System.out.println("register completed");
-            (new UniversalSceneController()).switchToTarget(event, "MainScene.fxml");
+            XMLController c = new XMLController();
+            c.updateElementName("username", tfUsername.getText());
+            c.updateElementName("password", tfPassword.getText());
+            c.updateElementName("autologin", "false");
+
+            (new UniversalSceneController()).switchToTarget(event, "SuccesfullLogin.fxml");
         }
         else
         {
-            System.out.println("Registration denied!");
+            lbAlert.setText("Registration denied!");
         }
     }
 

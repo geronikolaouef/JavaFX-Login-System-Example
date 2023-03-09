@@ -18,7 +18,7 @@ public class XMLController
 
     public XMLController()
     {
-        path = "resources/xml/User.xml";
+        path = "resources/xml/AppSettings.xml";
     }
     // returns the name of the targeted element
     public String readElementName(String targetElementName) 
